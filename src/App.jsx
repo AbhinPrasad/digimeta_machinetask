@@ -1,10 +1,28 @@
-import React from 'react'
-import { Navbar } from './components'
+import React, { useState, useEffect } from "react";
+import { Header, Navbar } from "./components";
 
 const App = () => {
-  return (
-    <Navbar/>
-  )
-}
+	const [theme, setTheme] = useState(null);
 
-export default App
+	useEffect(() => {
+		if (theme === "dark") {
+			document.documentElement.classList.add("dark");
+		} else {
+			document.documentElement.classList.remove("dark");
+		}
+	}, [theme]);
+
+	//Change theme
+	const toggleTheme = () => {
+		setTheme(theme === "dark" ? "light" : "dark");
+	};
+
+	return (
+		<div>
+			<Navbar toggleTheme={toggleTheme} theme={theme} />
+			<Header />
+		</div>
+	);
+};
+
+export default App;
